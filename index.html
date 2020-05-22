@@ -1,0 +1,45 @@
+<!doctype html>
+
+<head>
+	<link rel = "stylesheet" type = "text/css" href = "styles.css" />
+	<meta charset="utf-8">
+<script>
+window.addEventListener("load", function(){
+	searchForm.addEventListener('submit', setSearchEngine);
+});
+
+function setSearchEngine(event) {
+	if (q.value === '') {
+		q.style = 'background-color:red;';
+		event.preventDefault();
+		
+	}
+
+	let actions = {
+		"google":"https://www.google.com/search",
+		"duckDuckGo":"https://duckduckgo.com/",
+		"bing":"https://bing.com/search",
+		"ask":"https://ask.com/web"
+	};
+
+	let engine = document.querySelector('input[name=engine]:checked');
+	
+	if (engine === null) {
+		event.preventDefault();
+		}
+	searchForm.action = actions[engine.value];
+}
+</script>
+</head>
+<body>
+
+	<form id="searchForm" method="get">
+		<input type="text" name="q" id="q" required="">
+		<label>Google<input type="radio" name="engine" value="google"></label>
+		<label>DuckDuckGo<input type="radio" name="engine" value="duckDuckGo"></label>
+		<label>Bing<input type="radio" name="engine" value="bing"></label>
+		<label>Ask<input type="radio" name="engine" value="ask"></label>
+		<input type="submit" value="Go!">
+	</form>
+
+</body>
